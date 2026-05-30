@@ -1,19 +1,20 @@
 name: Build Startup Manager
 
 on:
+  workflow_dispatch:
+
   push:
     branches:
       - main
 
-  workflow_dispatch:
-
 jobs:
 
   build-x64:
+    name: Build x64
     runs-on: windows-latest
 
     steps:
-      - name: Checkout Source
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Python x64
@@ -22,16 +23,16 @@ jobs:
           python-version: "3.12"
           architecture: "x64"
 
-      - name: Install Dependencies
+      - name: Install dependencies
+        shell: powershell
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pyinstaller
 
-      - name: Build x64
+      - name: Build EXE x64
+        shell: powershell
         run: |
-          pyinstaller --noconfirm --onefile --windowed
-          --name StartupManager_x64
-          startup_manager_complete.py
+          pyinstaller --clean --noconfirm --onefile --windowed --name StartupManager_x64 startup_manager_complete.py
 
       - name: Upload x64
         uses: actions/upload-artifact@v4
@@ -40,28 +41,29 @@ jobs:
           path: dist/StartupManager_x64.exe
 
   build-x86:
+    name: Build x86
     runs-on: windows-latest
 
     steps:
-      - name: Checkout Source
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Python x86
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
           architecture: "x86"
 
-      - name: Install Dependencies
+      - name: Install dependencies
+        shell: powershell
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pyinstaller
 
-      - name: Build x86
+      - name: Build EXE x86
+        shell: powershell
         run: |
-          pyinstaller --noconfirm --onefile --windowed
-          --name StartupManager_x86
-          startup_manager_complete.py
+          pyinstaller --clean --noconfirm --onefile --windowed --name StartupManager_x86 startup_manager_complete.py
 
       - name: Upload x86
         uses: actions/upload-artifact@v4
