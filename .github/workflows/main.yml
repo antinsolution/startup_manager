@@ -32,7 +32,7 @@ jobs:
       - name: Build EXE x64
         shell: powershell
         run: |
-          pyinstaller --clean --noconfirm --onefile --windowed --name StartupManager_x64 startup_manager_complete.py
+          pyinstaller --clean --noconfirm --onefile --windowed --name StartupManager_x64 startup_manager.py
 
       - name: Upload x64
         uses: actions/upload-artifact@v4
@@ -63,7 +63,7 @@ jobs:
       - name: Build EXE x86
         shell: powershell
         run: |
-          pyinstaller --clean --noconfirm --onefile --windowed --name StartupManager_x86 startup_manager_complete.py
+          pyinstaller --clean --noconfirm --onefile --windowed --name StartupManager_x86 startup_manager.py
 
       - name: Upload x86
         uses: actions/upload-artifact@v4
