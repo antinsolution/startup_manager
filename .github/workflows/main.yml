@@ -29,8 +29,8 @@ jobs:
 
       - name: Build x64
         run: |
-          pyinstaller --noconfirm --onefile --windowed ^
-          --name StartupManager_x64 ^
+          pyinstaller --noconfirm --onefile --windowed
+          --name StartupManager_x64
           startup_manager_complete.py
 
       - name: Upload x64
@@ -59,8 +59,8 @@ jobs:
 
       - name: Build x86
         run: |
-          pyinstaller --noconfirm --onefile --windowed ^
-          --name StartupManager_x86 ^
+          pyinstaller --noconfirm --onefile --windowed
+          --name StartupManager_x86
           startup_manager_complete.py
 
       - name: Upload x86
